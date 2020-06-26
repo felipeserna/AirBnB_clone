@@ -1,3 +1,0 @@
-holi
-
-Script de authors

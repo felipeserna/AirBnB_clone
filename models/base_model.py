@@ -2,37 +2,54 @@
 """
 Module - Base Model
 """
-import json
-import uuid
+
+
 from datetime import datetime
+import uuid
 
 
 class BaseModel():
     """
     Defines all common attributes/methods for other classes
-    Private class attribute - ni (number of instances)
     """
-    __ni_objects = 0
-
-    def __init__(self, id=None, created_at, updated_at):
+    def __init__(self):
         """
         Initialize public class attributes:
         id - string - assign with an uuid when an instance is created.
-        created_at - datetime - assign with the current datetime
-        when an instance is created
-        updated_at - datetime - assign with the current datetime when
-        an instance is created and it will be updated every time you
-        change your object
+        datetime objects:
+        created_at -  assign  current datetime on instance creation
+        updated_at - assign current datetime updated if object changes
         """
-        if id is not None:
-            self.id = id
-        else:
-            BaseModel.__ni_objects += 1
-            for i in __ni_objects:
-                self.id = str(uuid.uuid4())
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = self.created_at
 
-        if id is None:
-            self.created_at = self.updated_at = datetime.utcnow()
-            tmp = datetime.strptime(tmp, %Y-%m-%dT%H:%M:%S.%f)
-        else:
-            self.updated_at = datetime.utcnow()
+    def __str__(self):
+        """
+        override default private class method - __str__
+        informal string representation of the BaseModel class
+        returns - [<class name>] (<self.id>) <self.__dict__>
+        """
+        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
+                                           self.__dict__)
+    def save(self):
+        """
+        public class method - save
+        updates the public class attribute updated_at with current datatime
+        """
+        self.updated_at = datetime.now()
+
+    def to_dict(self):
+        """
+        public class method - to_dict
+        returns the dictionary representation of BaseModel class
+        __class__ key set as holder for class name of the object
+        display datetime format as:
+        Year-Month-DayTHour:Minutes:Seconds.Milliseconds
+        """
+        format_t = "%Y-%m-%dT%H:%M:%S.%f"
+        d = self.__dict__.copy()
+        d["created_at"] = d["created_at"].strftime(format_t)
+        d["updated_at"] = d["updated_at"].strftime(format_t)
+        d["__class__"] = self.__class__.__name__
+        return d
