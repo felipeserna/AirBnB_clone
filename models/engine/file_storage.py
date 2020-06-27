@@ -6,7 +6,7 @@ Module - File Storage
 
 from models.base_model import BaseModel
 import json
-
+from models.user import User
 
 class FileStorage:
     """
@@ -50,6 +50,6 @@ class FileStorage:
             with open(self.__file_path, 'r') as my_file:
                 item = json.load(my_file)
             for key in item:
-                self.__objects[key] = BaseModel(**item[key])
+                    self.__objects[key] = BaseModel(**item[key])
         except:
             pass

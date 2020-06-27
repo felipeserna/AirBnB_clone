@@ -5,10 +5,11 @@ Module - console
 
 import cmd
 from datetime import datetime
+from models.user import User
 import models
 from models.base_model import BaseModel
 import shlex
-classes = ["BaseModel"]
+classes = ["BaseModel", "User"]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -44,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of BaseModel
         saves it (to the JSON file) and prints the id.
         """
-        args = args.split()
+        args = shlex.split(args)
         if len(args) == 0:
             print("** class name missing **")
             return False
@@ -62,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of an instance
         based on the class name and id
         """
-        args = args.split()
+        args = shlex.split(args)
         if len(args) == 0:
             print("** class name missing **")
             return False
@@ -84,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
         Deletes an instance based on the class name and id
         Save the change into the JSON file
         """
-        args = args.split()
+        args = shlex.split(args)
         if len(args) == 0:
             print("** class name missing **")
             return False
@@ -107,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation
         of all instances based or not on the class name.
         """
-        args = args.split()
+        args = shlex.split(args)
         if len(args) == 0:
             for item in models.storage.all():
                 print(item)
