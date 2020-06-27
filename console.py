@@ -3,15 +3,20 @@
 Module - console
 """
 
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 import cmd
 from datetime import datetime
+from models.base_model import BaseModel
 from models.user import User
 import models
-from models.base_model import BaseModel
 import shlex
-classes = ["BaseModel", "User"]
-
-
+classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+ints = "number_rooms, number_bathrooms, max_guest, price_by_night"
+floats = "latitude, longitud"
 class HBNBCommand(cmd.Cmd):
     """
     class console - entry point of the command interpreter
@@ -145,12 +150,10 @@ class HBNBCommand(cmd.Cmd):
                                 if isinstance(args[2], datetime) is True:
                                     pass
                                 if args[0] in classes:
-                                    if isinstance(args[2], int) is True:
+                                    if isinstance(args[2], ints) is True:
                                         args[3] = int(args[3])
-                                    elif isinstance(args[2], float) is True:
+                                    elif isinstance(args[2], floats) is True:
                                         args[3] = float(args[3])
-                                    elif isinstance(args[2], id) is True:
-                                        pass
                             except:
                                 pass
                             setattr(models.storage.all()[key], args[2], args[3])
