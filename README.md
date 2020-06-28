@@ -2,7 +2,7 @@
 
 ## Description
 
-hbnb console is our first approach to a simple clone of the [AirBnB website](<a href="http://airbnb.com"></a>). The goal of the project is to deploy our server, this first part of the process we coded the console, that is a command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging).
+hbnb console is our first approach to a simple clone of the [AirBnB website](http://airbnb.com). The goal of the project is to deploy our server, this first part of the process we coded the console, that is a command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging).
 
 ---
 
