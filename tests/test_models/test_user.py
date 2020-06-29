@@ -98,3 +98,6 @@ class testUser(unittest.TestCase):
         ana = User()
         string = "[User] ({}) {}".format(ana.id, ana.__dict__)
         self.assertEqual(string, str(ana))
+
+if __name__ == '__main__':
+    unittest.main()

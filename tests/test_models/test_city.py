@@ -61,7 +61,7 @@ class testCity(unittest.TestCase):
 
     def test_City_attributes(self):
         """
-        check if has attributes email, password, first & last names
+        check if has attributes state_id & name
         """
         new_city = City()
         self.assertTrue(hasattr(new_city, "state_id"))
@@ -92,3 +92,6 @@ class testCity(unittest.TestCase):
         kansas = City()
         string = "[City] ({}) {}".format(kansas.id, kansas.__dict__)
         self.assertEqual(string, str(kansas))
+
+if __name__ == '__main__':
+    unittest.main()

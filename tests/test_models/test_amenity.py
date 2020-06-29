@@ -61,7 +61,7 @@ class testAmenity(unittest.TestCase):
 
     def test_Amenity_attributes(self):
         """
-        check if has attributes email, password, first & last names
+        check if has attribute name
         """
         new_amenity = Amenity()
         self.assertTrue(hasattr(new_amenity, "name"))
@@ -87,8 +87,12 @@ class testAmenity(unittest.TestCase):
 
     def test_str_Amenity(self):
         """
-        check for correct informal string representation json of subclass Amenity
+        check for correct informal string representation
+        json of subclass Amenity
         """
         kansas = Amenity()
         string = "[Amenity] ({}) {}".format(kansas.id, kansas.__dict__)
         self.assertEqual(string, str(kansas))
+
+if __name__ == '__main__':
+    unittest.main()

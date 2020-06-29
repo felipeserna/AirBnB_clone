@@ -61,7 +61,7 @@ class testReview(unittest.TestCase):
 
     def test_Review_attributes(self):
         """
-        check if has attributes email, password, first & last names
+        check if has attributes place_id, user_id, text
         """
         new_review = Review()
         self.assertTrue(hasattr(new_review, "place_id"))
@@ -93,3 +93,6 @@ class testReview(unittest.TestCase):
         kansas = Review()
         string = "[Review] ({}) {}".format(kansas.id, kansas.__dict__)
         self.assertEqual(string, str(kansas))
+
+if __name__ == '__main__':
+    unittest.main()
