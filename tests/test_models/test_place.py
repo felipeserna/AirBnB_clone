@@ -61,7 +61,9 @@ class testPlace(unittest.TestCase):
 
     def test_Place_attributes(self):
         """
-        check if has attributes email, password, first & last names
+        check if has attributes city_id, user_id, name, description,
+        number_rooms, number_bathrooms, max_guest, price_by_night,
+        latitude, longitude, amenity_ids
         """
         new_place = Place()
         self.assertTrue(hasattr(new_place, "city_id"))
@@ -101,3 +103,6 @@ class testPlace(unittest.TestCase):
         kansas = Place()
         string = "[Place] ({}) {}".format(kansas.id, kansas.__dict__)
         self.assertEqual(string, str(kansas))
+
+if __name__ == '__main__':
+    unittest.main()

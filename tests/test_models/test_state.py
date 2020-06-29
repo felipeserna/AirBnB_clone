@@ -61,7 +61,7 @@ class testState(unittest.TestCase):
 
     def test_State_attributes(self):
         """
-        check if has attributes email, password, first & last names
+        check if has attributes name
         """
         new_state = State()
         self.assertTrue(hasattr(new_state, "name"))
@@ -92,3 +92,6 @@ class testState(unittest.TestCase):
         kansas = State()
         string = "[State] ({}) {}".format(kansas.id, kansas.__dict__)
         self.assertEqual(string, str(kansas))
+
+if __name__ == '__main__':
+    unittest.main()

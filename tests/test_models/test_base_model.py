@@ -63,7 +63,7 @@ class TestBaseModel(unittest.TestCase):
             "name": str,
             "my_number": int
             }
-        for a, t in a_t:
+        for a, t in a_t.items():
             with self.subTest(a=a, t=t):
                 self.assertIn(a, ww.__dict__)
                 self.assertEqual(isinstance(ww.__dict__[a], t), True)
@@ -72,7 +72,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         """SI FUNCIONA
-        check if last updated changes when saves"""
+        check if last updated changes where saved"""
         hola = BaseModel()
         creado = hola.created_at
         viejo = hola.updated_at
