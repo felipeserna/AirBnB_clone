@@ -17,6 +17,8 @@ import shlex
 classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 ints = "number_rooms, number_bathrooms, max_guest, price_by_night"
 floats = "latitude, longitud"
+
+
 class HBNBCommand(cmd.Cmd):
     """
     class console - entry point of the command interpreter
@@ -33,7 +35,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """
         public instance method
-        checks if no input given, an empty line + ENTER shouldn’t execute anything
+        checks if no input given, empty line + ENTER shouldn’t execute anything
         """
         pass
 
@@ -74,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
             return False
         if args[0] in classes:
             if len(args) > 1:
-                key = args[0] + "." + args[1]  #args 0 is name, args 1 es id
+                key = args[0] + "." + args[1]  # args 0 is name, args 1 es id
                 if key in models.storage.all():
                     print(models.storage.all()[key])
                 else:
@@ -142,8 +144,8 @@ class HBNBCommand(cmd.Cmd):
             return False
         elif args[0] in classes:
             if len(args) > 1:
-                key = args[0] + "." + args[1]
-                if key in models.storage.all():
+                k = args[0] + "." + args[1]
+                if k in models.storage.all():
                     if len(args) > 2:
                         if len(args) > 3:
                             try:
@@ -156,8 +158,8 @@ class HBNBCommand(cmd.Cmd):
                                         args[3] = float(args[3])
                             except:
                                 pass
-                            setattr(models.storage.all()[key], args[2], args[3])
-                            models.storage.all()[key].save()
+                            setattr(models.storage.all()[k], args[2], args[3])
+                            models.storage.all()[k].save()
                         else:
                             print("** value missing **")
                     else:

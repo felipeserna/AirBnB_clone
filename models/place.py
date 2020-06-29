@@ -25,7 +25,7 @@ class Place(BaseModel):
     def __init__(self, *args, **kwargs):
         """
         Initialize public class attributes:
-        city_id, user_id, name, description, amenity_ids - string- empty strings
+        city_id, user_id, name, description, amenity_ids - empty strings
         number_rooms, number_bathrooms, max_guest, price_by_night - integers
         latitude, longitude - floats
         """
