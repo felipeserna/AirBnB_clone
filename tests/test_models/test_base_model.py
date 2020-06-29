@@ -50,6 +50,26 @@ class TestBaseModel(unittest.TestCase):
     """
     tests class BaseModel
     """
+    def test_init(self):
+        """ No funciona
+        checks correct instances """
+        ww = BaseModel()
+        ww.name = "waluigi"
+        ww.my_number = 40
+        a_t = {
+            "id": str,
+            "created_at": datetime,
+            "updated_at": datetime,
+            "name": str,
+            "my_number": int
+            }
+        for a, t in a_t:
+            with self.subTest(a=a, t=t):
+                self.assertIn(a, ww.__dict__)
+                self.assertEqual(isinstance(ww.__dict__[a], t), True)
+        self.assertEqual(ww.name, "waluigi")
+        self.assertEqual(ww.my_number, 40)
+
     def test_save(self):
         """SI FUNCIONA
         check if last updated changes when saves"""
@@ -92,6 +112,21 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_dictionary['__class__'], "BaseModel")
         self.assertEqual(my_dictionary['name'], "felipe")
         self.assertEqual(my_dictionary['my_number'], 5)
+
+    def test_dict_dt_values(self):
+        """
+        check if attribute datetime values are in the correct output format
+        """
+        box = BaseModel()
+        box.name = "Banana"
+        box.my_number = 25
+        d = box.to_dict()
+        format = "%Y-%m-%dT%H:%M:%S.%f"
+        self.assertEqual(d["__class__"], "BaseModel")
+        self.assertEqual(isinstance(d["created_at"], str), True)
+        self.assertEqual(isinstance(d["updated_at"], str), True)
+        self.assertEqual(d["created_at"], box.created_at.strftime(format))
+        self.assertEqual(d["updated_at"], box.updated_at.strftime(format))
 
     def test_datetime(self):
         """SI FUNCIONA
