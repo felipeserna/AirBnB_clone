@@ -13,6 +13,7 @@ from datetime import datetime
 import inspect
 import uuid
 import time
+import os
 
 
 class TestDocsBaseModel(unittest.TestCase):
@@ -50,6 +51,11 @@ class TestBaseModel(unittest.TestCase):
     """
     tests class BaseModel
     """
+    def tearDown(self):
+        """clean everything up after running setup"""
+        sys.stdout = sys.__stdout__
+        os.remove("file.json")
+
     def test_init(self):
         """ No funciona
         checks correct instances """

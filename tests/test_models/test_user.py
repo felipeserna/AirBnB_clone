@@ -12,6 +12,8 @@ from models import user
 from models.user import User
 import inspect
 import pep8
+import sys
+import os
 
 
 class TestDocsUser(unittest.TestCase):
@@ -49,6 +51,11 @@ class testUser(unittest.TestCase):
     """
     tests subclass User
     """
+    def tearDown(self):
+        """clean everything up after running setup"""
+        sys.stdout = sys.__stdout__
+        os.remove("file.json")
+
     def test_subclass_of_BaseModel(self):
         """
         check if user inherits from BaseModel, check for the attributes

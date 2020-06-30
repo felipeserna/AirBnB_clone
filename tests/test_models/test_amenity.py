@@ -12,6 +12,8 @@ from models import amenity
 from models.amenity import Amenity
 import inspect
 import pep8
+import sys
+import os
 
 
 class TestDocsAmenity(unittest.TestCase):
@@ -49,6 +51,11 @@ class testAmenity(unittest.TestCase):
     """
     tests subclass Amenity
     """
+    def tearDown(self):
+        """clean everything up after running setup"""
+        sys.stdout = sys.__stdout__
+        os.remove("file.json")
+
     def test_subclass_of_BaseModel(self):
         """
         check if Amenity inherits from BaseModel, check for the attributes

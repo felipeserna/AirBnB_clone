@@ -12,6 +12,8 @@ from models import place
 from models.place import Place
 import inspect
 import pep8
+import sys
+import os
 
 
 class TestDocsPlace(unittest.TestCase):
@@ -49,6 +51,11 @@ class testPlace(unittest.TestCase):
     """
     tests subclass Place
     """
+    def tearDown(self):
+        """clean everything up after running setup"""
+        sys.stdout = sys.__stdout__
+        os.remove("file.json")
+
     def test_subclass_of_BaseModel(self):
         """
         check if Place inherits from BaseModel, check for the attributes

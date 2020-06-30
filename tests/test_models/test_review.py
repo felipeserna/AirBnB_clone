@@ -12,6 +12,8 @@ from models import review
 from models.review import Review
 import inspect
 import pep8
+import sys
+import os
 
 
 class TestDocsReview(unittest.TestCase):
@@ -49,6 +51,11 @@ class testReview(unittest.TestCase):
     """
     tests subclass Review
     """
+    def tearDown(self):
+        """clean everything up after running setup"""
+        sys.stdout = sys.__stdout__
+        os.remove("file.json")
+
     def test_subclass_of_BaseModel(self):
         """
         check if Review inherits from BaseModel, check for the attributes

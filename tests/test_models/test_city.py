@@ -12,6 +12,8 @@ from models import city
 from models.city import City
 import inspect
 import pep8
+import sys
+import os
 
 
 class TestDocsCity(unittest.TestCase):
@@ -49,6 +51,11 @@ class testCity(unittest.TestCase):
     """
     tests subclass City
     """
+    def tearDown(self):
+        """clean everything up after running setup"""
+        sys.stdout = sys.__stdout__
+        os.remove("file.json")
+
     def test_subclass_of_BaseModel(self):
         """
         check if City inherits from BaseModel, check for the attributes

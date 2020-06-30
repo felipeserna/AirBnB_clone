@@ -12,6 +12,8 @@ from models import state
 from models.state import State
 import inspect
 import pep8
+import sys
+import os
 
 
 class TestDocsState(unittest.TestCase):
@@ -49,6 +51,11 @@ class testState(unittest.TestCase):
     """
     tests subclass State
     """
+    def tearDown(self):
+        """clean everything up after running setup"""
+        sys.stdout = sys.__stdout__
+        os.remove("file.json")
+
     def test_subclass_of_BaseModel(self):
         """
         check if State inherits from BaseModel, check for the attributes
