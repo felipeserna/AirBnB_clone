@@ -70,7 +70,7 @@ class TestFileStorage(unittest.TestCase):
     def tearDown(self):
         """clean everything up after running setup"""
         sys.stdout = sys.__stdout__
-        os.remove("file.json")
+        """os.remove("file.json")"""
 
     def test_dicts(self):
         """tests dictionaries in the FileStorage"""
@@ -94,22 +94,57 @@ class TestFileStorage(unittest.TestCase):
                 self.assertEqual(my_dict, storage._FileStorage__objects)
         FileStorage._FileStorage__objects = box
 
-    def test_save_and_reload(self):
-        """tests if an object was serialized and if a string was
-        deserialized"""
-        storage = FileStorage()
-        my_dict = {}
-        for key, value in classes.items():
-            one_class = value()
-            real_key = one_class.__class__.__name__ + "." + one_class.id
-            my_dict[real_key] = one_class
+    def test_save(self):
+        """tests if an object was serialized"""
+        base = BaseModel()
+        amenity = Amenity()
+        city = City()
+        place = Place()
+        review = Review()
+        state = State()
+        user = User()
+        models.storage.new(base)
+        models.storage.new(amenity)
+        models.storage.new(city)
+        models.storage.new(place)
+        models.storage.new(review)
+        models.storage.new(state)
+        models.storage.new(user)
+        models.storage.save()
+        string = ""
+        with open("file.json", 'r') as my_file:
+            string = my_file.read()
+            self.assertIn("BaseModel." + base.id, string)
+            self.assertIn("Amenity." + amenity.id, string)
+            self.assertIn("City." + city.id, string)
+            self.assertIn("Place." + place.id, string)
+            self.assertIn("Review." + review.id, string)
+            self.assertIn("State." + state.id, string)
+            self.assertIn("User." + user.id, string)
+
+    def test_reload(self):
+        """tests if a string was deserialized"""
+        base = BaseModel()
+        amenity = Amenity()
+        city = City()
+        place = Place()
+        review = Review()
+        state = State()
+        user = User()
+        models.storage.new(base)
+        models.storage.new(amenity)
+        models.storage.new(city)
+        models.storage.new(place)
+        models.storage.new(review)
+        models.storage.new(state)
+        models.storage.new(user)
+        models.storage.save()
+        models.storage.reload()
         box = FileStorage._FileStorage__objects
-        FileStorage._FileStorage__objects = my_dict
-        storage.save()
-        FileStorage._FileStorage__objects = box
-        for key, value in my_dict.items():
-            my_dict[key] = one_class.to_dict()
-        string = json.dumps(my_dict)
-        with open("file.json", "r") as my_file:
-            item = my_file.read()
-        self.assertEqual(json.loads(string), json.loads(item))
+        self.assertIn("BaseModel." + base.id, box)
+        self.assertIn("Amenity." + amenity.id, box)
+        self.assertIn("City." + city.id, box)
+        self.assertIn("Place." + place.id, box)
+        self.assertIn("Review." + review.id, box)
+        self.assertIn("State." + state.id, box)
+        self.assertIn("User." + user.id, box)
