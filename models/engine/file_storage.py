@@ -12,8 +12,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-l_c = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-       "Place": Place, "Review": Review, "State": State, "User": User}
 
 
 class FileStorage:
@@ -36,8 +34,9 @@ class FileStorage:
         Public instance method
         Sets in __objects the obj with key <obj class name>.id
         """
-        key = obj.__class__.__name__ + "." + obj.id
-        self.__objects[key] = obj
+        if obj is not None:
+            key = obj.__class__.__name__ + "." + obj.id
+            self.__objects[key] = obj
 
     def save(self):
         """
@@ -53,14 +52,11 @@ class FileStorage:
     def reload(self):
         """
         deserializes the JSON file to __objects
-        i = items , objects loaded
-        k = keys , attribute names loaded
-        there is a double pointer to asign values to those attributes
         """
         try:
             with open(self.__file_path, 'r') as my_file:
-                i = json.load(my_file)
-            for k in i:
-                self.__objects[k] = l_C[i[k]["__class__"]](**i[k])
+                item = json.load(my_file)
+            for key in item:
+                    self.__objects[key] = BaseModel(**item[key])
         except:
             pass
