@@ -12,10 +12,8 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-l_c = {"Amenity": Amenity, "BaseModel": BaseModel,
-       "City": City, "Place": Place,
-       "Review": Review, "State": State, "User": User
-}
+l_c = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+       "Place": Place, "Review": Review, "State": State, "User": User}
 
 
 class FileStorage:
@@ -63,6 +61,6 @@ class FileStorage:
             with open(self.__file_path, 'r') as my_file:
                 i = json.load(my_file)
             for k in i:
-                    self.__objects[k] = l_C[i[k]["__class__"]](**i[k])
+                self.__objects[k] = l_C[i[k]["__class__"]](**i[k])
         except:
             pass
