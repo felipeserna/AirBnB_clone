@@ -164,17 +164,17 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             for item in models.storage.all().values():
                 my_list.append(str(item))
-            print("[", end="")
+            print("", end="")
             print(", ".join(my_list), end="")
-            print("]")
+            print("")
 
         elif args[0] in classes:
             for key in models.storage.all():
                 if args[0] in key:
                     my_list.append(str(models.storage.all()[key]))
-            print("[", end="")
+            print("", end="")
             print(", ".join(my_list), end="")
-            print("]")
+            print("")
         else:
             print("** class doesn't exist **")
 

@@ -60,8 +60,7 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r') as my_file:
                 item = json.load(my_file)
-            for key, values in item.items():
-                my_dict = FileStorage.classes[values['__class__']](**values)
-                FileStorage.__objects[key] = my_dict
+            for k in item:
+                self.__objects[k] = classes[item[k]["__class__"]](**item[k])
         except:
             pass
