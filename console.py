@@ -14,9 +14,11 @@ from models.base_model import BaseModel
 from models.user import User
 import models
 import shlex
+import ast
 classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 ints = "number_rooms, number_bathrooms, max_guest, price_by_night"
 floats = "latitude, longitud"
+commands = ["all", "count", "show", "destroy", "update"]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -24,6 +26,48 @@ class HBNBCommand(cmd.Cmd):
     class console - entry point of the command interpreter
     """
     prompt = '(hbnb)'
+
+    def default(self, line):
+        """Parses input by splitting arguments"""
+        clase = line.split(".", 1)
+        if len(clase) < 2:
+            return
+        if clase[0] not in classes:
+            return
+        command = clase[1].split("(", 1)
+        if command[0] not in commands or len(command) < 2:
+            return
+        args = command[1][:-1]
+        if command[0] == "show":
+            return self.do_show(clase[0] + " " + args)
+        if command[0] == "all":
+            return self.do_all(clase[0] + " " + args)
+        if command[0] == "count":
+            return self.do_count(clase[0] + " " + args)
+        if command[0] == "destroy":
+            return self.do_destroy(clase[0] + " " + args)
+        if command[0] == "update":
+            if len(args) < 1:
+                return
+            attr_val = args.split(",", 1)
+            if len(attr_val) < 2:
+                return
+            else:
+                args = args.split(",", 2)
+                args = args.strip()
+                return self.do_update(clase[0] + " " + args)
+
+    def do_count(self, args):
+        """Retrieve the number of instances of a class"""
+        args = shlex.split(args)
+        if len(args) < 1:
+            return
+        _nb_objects = 0
+        items = storage.all()
+        for key in items:
+            if items[key].__class__.__name__ == args[0]:
+                _nb_objects += 1
+        print(_nb_objects)
 
     def do_EOF(self, args):
         """
@@ -116,20 +160,23 @@ class HBNBCommand(cmd.Cmd):
         of all instances based or not on the class name.
         """
         args = shlex.split(args)
+        my_list = []
         if len(args) == 0:
-            for item in models.storage.all():
-                print(item)
+            for item in models.storage.all().values():
+                my_list.append(str(item))
+            print("[", end="")
+            print(", ".join(my_list), end="")
+            print("]")
 
         elif args[0] in classes:
             for key in models.storage.all():
                 if args[0] in key:
-                    print(models.storage.all()[key])
-                else:
-                    print("** class doesn't exist **")
-                    return False
+                    my_list.append(str(models.storage.all()[key]))
+            print("[", end="")
+            print(", ".join(my_list), end="")
+            print("]")
         else:
             print("** class doesn't exist **")
-            return False
 
     def do_update(self, args):
         """

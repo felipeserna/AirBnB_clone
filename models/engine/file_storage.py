@@ -12,6 +12,10 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+classes = {"BaseModel": BaseModel, "User": User, "State": State,
+           "City": City, "Amenity": Amenity,
+           "Place": Place, "Review": Review
+           }
 
 
 class FileStorage:
@@ -56,7 +60,8 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r') as my_file:
                 item = json.load(my_file)
-            for key in item:
-                    self.__objects[key] = BaseModel(**item[key])
+            for key, values in item.items():
+                my_dict = FileStorage.classes[values['__class__']](**values)
+                FileStorage.__objects[key] = my_dict
         except:
             pass
