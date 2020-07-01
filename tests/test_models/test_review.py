@@ -20,6 +20,17 @@ class TestDocsReview(unittest.TestCase):
     """SI FUNCIONAN LAS DE DOCUMENTACION
     check for documentation """
 
+    def test_permissions(self):
+        """ Test for check the permissions """
+        exist = os.access('models/review.py', os.F_OK)
+        self.assertTrue(exist)
+        read = os.access('models/review.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/review.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/review.py', os.X_OK)
+        self.assertTrue(exe)
+
     def test_module_doc(self):
         """ check for module documentation """
         self.assertTrue(len(models.review.__doc__) > 0)

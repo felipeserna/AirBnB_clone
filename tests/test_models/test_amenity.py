@@ -20,6 +20,17 @@ class TestDocsAmenity(unittest.TestCase):
     """SI FUNCIONAN LAS DE DOCUMENTACION
     check for documentation """
 
+    def test_permissions(self):
+        """ Test for check the permissions """
+        exist = os.access('models/amenity.py', os.F_OK)
+        self.assertTrue(exist)
+        read = os.access('models/amenity.py', os.R_OK)
+        self.assertTrue(read)
+        write = os.access('models/amenity.py', os.W_OK)
+        self.assertTrue(write)
+        exe = os.access('models/amenity.py', os.X_OK)
+        self.assertTrue(exe)
+
     def test_module_doc(self):
         """ check for module documentation """
         self.assertTrue(len(models.amenity.__doc__) > 0)
