@@ -15,6 +15,7 @@ from models.user import User
 import models
 import shlex
 import ast
+from models import storage
 classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 ints = "number_rooms, number_bathrooms, max_guest, price_by_night"
 floats = "latitude, longitud"
