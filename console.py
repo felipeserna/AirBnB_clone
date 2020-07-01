@@ -55,8 +55,7 @@ class HBNBCommand(cmd.Cmd):
                 return
             else:
                 args = args.split(",", 2)
-                args = args.strip()
-                return self.do_update(clase[0] + " " + args)
+                return self.do_update(" ".join([clase[0]] + args))
 
     def do_count(self, args):
         """Retrieve the number of instances of a class"""
