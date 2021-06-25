@@ -97,13 +97,21 @@ No known bugs at this time. Do not hesitate to report bugs to the authors.
 
 ## Authors:
 Felipe Serna <1509@holbertonschool.com>
+
 Chemical Engineer with skills in the design of industrial processes for the elaboration of new products with added value, taking into account economic, environmental and safety restrictions. Knowledge in water treatment, integrated management systems HSEQ and GLP. High interest in fats and oils, particularly for the manufacture of biodiesel. In his Chemical Engineering thesis he designed and built the first microreactor in Colombia for manufacturing biodiesel.
+
 [LinkedIn profile](https://www.linkedin.com/in/felipesernabarbosa/)
+
 [Twitter](https://twitter.com/felipesernabar1)
+
 [Porfolio Project repository](https://github.com/skillshare-mentorship/holberton-live-experience)
+
 Santiago Martinez <sntgmtnz@gmail.com>
+
 Advertising professional, technician in graphic arts. Studying software engineering at Holberton School. Facing the capitalist dogma, art lover, follow me @choladito on Twitter. Knowledge in programming languages C & Python, currently learning processing, eager to make generative art and HTML gadgets.
+
 [LinkedIn profile](https://www.linkedin.com/in/choladito/)
+
 [Twitter](https://twitter.com/choladito)
 ## License:
 Public domain. No copyrights protection.
